@@ -1,6 +1,7 @@
-// import axios from "axios";
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-// import qs from "qs";
+import qs from "qs";
+import _ from "lodash";
 
 // 接口请求封装方法1：https://github.dev/karambarakat/MoneyTracker/tree/350b9631e0b4d4bc8088d317f0a95d496905de27
 
@@ -12,16 +13,17 @@ import { useQuery } from "@tanstack/react-query";
 //   return nameOrId ? { products: [data] } : data;
 // };
 
-// const fetchData = async ({ queryKey }) => {
-//   const { params } = queryKey[0];
-//   console.log("🚀 ~ file: index.js:14 ~ fetchData ~ params:", params);
+export const fetchData = async ({ queryKey }: any) => {
+  const params = queryKey[0];
 
-//   const { data } = await axios.get(
-//     `https://dummyjson.com/products?${qs.stringify(params)}`
-//   );
+  const { data } = await axios.get(
+    `https://dummyjson.com/products/search?${qs.stringify(
+      _.omit(params, "queryIdentifier")
+    )}`
+  );
 
-//   return data;
-// };
+  return data;
+};
 
 export const useFetchData = (params: any) => {
   return useQuery({
@@ -30,17 +32,17 @@ export const useFetchData = (params: any) => {
   });
 };
 
-export const fetchData = async ({ queryKey }: any) => {
-  const { apiName } = queryKey[0];
+// export const fetchData = async ({ queryKey }: any) => {
+//   const { apiName } = queryKey[0];
 
-  const response = await fetch(
-    `https://danieljcafonso.builtwithdark.com/${apiName}`
-  );
+//   const response = await fetch(
+//     `https://danieljcafonso.builtwithdark.com/${apiName}`
+//   );
 
-  if (!response.ok) throw new Error("Something failed in your request");
+//   if (!response.ok) throw new Error("Something failed in your request");
 
-  return response.json();
-};
+//   return response.json();
+// };
 
 export const apiA = "react-query-api";
 export const apiB = "react-query-api-two";
