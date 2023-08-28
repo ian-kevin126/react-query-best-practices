@@ -15,6 +15,7 @@ import _ from "lodash";
 
 export const fetchData = async ({ queryKey }: any) => {
   const params = queryKey[0];
+  console.log("🚀 ~ file: index.ts:18 ~ fetchData ~ queryKey:", queryKey);
 
   const { data } = await axios.get(
     `https://dummyjson.com/products/search?${qs.stringify(

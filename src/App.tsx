@@ -1,11 +1,9 @@
-import DynamicParallelQueries from "./components/DynamicParallelQueries";
-// import ManualParallelQueries from "./components/ManualParallelQueries";
+import PaginationDemo from "./components/PaginationDemo";
 
 function App() {
   return (
     <>
-      {/* <ManualParallelQueries /> */}
-      <DynamicParallelQueries />
+      <PaginationDemo />
     </>
   );
 }
