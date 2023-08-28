@@ -1,5 +1,6 @@
-import PrefetchDemo from "./components/PrefetchDemo";
+import PrefetchDemo from "../components/PrefetchDemo";
 
+// 数据预取demo2
 function App() {
   return (
     <>

@@ -1,8 +1,8 @@
 import { Button, Space } from "antd";
 import { useQueryClient } from "@tanstack/react-query";
-import { fetchData } from "./api";
 import { useState } from "react";
-import PrefetchedDataComponent from "./components/PrefetchedDataComponent";
+import { fetchData } from "../api";
+import PrefetchedDataComponent from "../components/PrefetchedDataComponent";
 
 function App() {
   const [renderComponent, setRenderComponent] = useState(false);
