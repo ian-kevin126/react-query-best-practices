@@ -1,6 +1,8 @@
-import axios from "axios";
+// import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import qs from "qs";
+// import qs from "qs";
+
+// 接口请求封装方法1：https://github.dev/karambarakat/MoneyTracker/tree/350b9631e0b4d4bc8088d317f0a95d496905de27
 
 // const fetchData = async (nameOrId) => {
 //   const { data } = await axios.get(

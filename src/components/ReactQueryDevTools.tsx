@@ -8,7 +8,7 @@ const ReactQueryDevtoolsProduction = React.lazy(() =>
   )
 );
 
-const ReactQueryDevtools = () => {
+const ReactQueryDevtoolsProd = () => {
   const [showDevtools, setShowDevtools] = useState(false);
 
   useEffect(() => {
@@ -25,4 +25,4 @@ const ReactQueryDevtools = () => {
   );
 };
 
-export default ReactQueryDevtools;
+export default ReactQueryDevtoolsProd;
