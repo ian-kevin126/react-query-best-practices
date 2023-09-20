@@ -1,15 +1,10 @@
-import { useParams } from "react-router-dom";
 import useFetch from "../../utils/hooks/useFetch";
-import { Card, Descriptions, DescriptionsProps } from "antd";
-import { CommonSpin } from "../../components/Common";
+import { Card, Descriptions, DescriptionsProps, Empty, Spin } from "antd";
 
-const UserDetails = () => {
-  const { id } = useParams();
-  const {
-    data: user,
-    error,
-    isPending,
-  } = useFetch("http://localhost:8008/users/" + id);
+const UserDetail = ({ id }: { id: number | undefined }) => {
+  const { data: user, isPending } = useFetch(
+    "http://localhost:8008/users/" + id
+  );
 
   const items: DescriptionsProps["items"] = [
     {
@@ -31,9 +26,9 @@ const UserDetails = () => {
 
   return (
     <Card title="用户详情">
-      {isPending && <CommonSpin />}
+      {!id && <Empty />}
 
-      {error && <p>{error}</p>}
+      {isPending && <Spin />}
 
       {user && (
         <>
@@ -44,4 +39,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default UserDetail;

@@ -20,6 +20,11 @@ export interface UseTodo {
   error?: string;
 }
 
+export interface IUser {
+  id: number;
+  name: string;
+}
+
 export interface User {
   accessToken: string;
   user: {

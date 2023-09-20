@@ -1,8 +1,8 @@
 import { Button, Card, Table } from "antd";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { useFetchUserList } from "../../api/user";
 import { CommonSpin } from "../../components/Common";
+import UserDetail from "./UserDetail";
 
 interface User {
   id: number;
@@ -12,10 +12,10 @@ interface User {
 }
 
 const UserList: React.FC = () => {
-  const navigate = useNavigate();
+  const [currentId, setCurrentId] = useState<number | undefined>();
 
   const goToUserDetail = (id: number) => {
-    navigate(`/users/${id}`);
+    setCurrentId(id);
   };
 
   const { data: userList, isLoading, isError, error } = useFetchUserList();
@@ -59,6 +59,7 @@ const UserList: React.FC = () => {
   return (
     <Card title="用户列表">
       <Table rowKey={"id"} dataSource={userList} columns={columns as any} />
+      <UserDetail id={currentId} />
     </Card>
   );
 };

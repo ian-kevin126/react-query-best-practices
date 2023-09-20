@@ -1,8 +1,107 @@
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import qs from "qs";
 import _ from "lodash";
+import { IUser } from "../types/todo";
 
+const URL_BASE = "https://jsonplaceholder.typicode.com/users";
+const headers = { "Content-type": "application/json" };
+
+/************ 接口请求 ************/
+
+export const getUsers = async (): Promise<IUser[]> => {
+  return await (await fetch(URL_BASE)).json();
+};
+
+export const createUser = async (user: Omit<IUser, "id">): Promise<IUser> => {
+  const body = JSON.stringify(user);
+  const method = "POST";
+  return await (await fetch(URL_BASE, { body, method, headers })).json();
+};
+
+export const editUser = async (user: IUser): Promise<IUser> => {
+  const body = JSON.stringify(user);
+  const method = "PUT";
+  return await (
+    await fetch(`${URL_BASE}/${user.id}`, { body, method, headers })
+  ).json();
+};
+
+export const deleteUser = async (id: number): Promise<number> => {
+  const method = "DELETE";
+  await fetch(`${URL_BASE}/${id}`, { method });
+  return id;
+};
+
+/************ React Query 封装接口请求 Hooks ************/
+const USER_QUERY_KEY = "USER_QUERY_KEY";
+
+export const useGetUsers = () => {
+  return useQuery({
+    queryKey: [USER_QUERY_KEY],
+    queryFn: getUsers,
+  });
+};
+
+export const useCreateUser = () => {
+  // 注意：不要解构钩子 useQueryClient 的任何属性，因为你将丢失引用，并且该属性将无法按你想要的方式工作。
+  const queryClient = useQueryClient();
+
+  return useMutation(createUser, {
+    onSuccess: (user: IUser) => {
+      // 访问缓存（我们的状态）并添加这个新创建的用户，使用setQueryData属性设置新数据
+      queryClient.setQueryData(
+        // 第一个是queryKey，用于标识您要获取缓存的哪一部分数据并修改它。
+        [USER_QUERY_KEY],
+        // 第二个参数是设置新数据的函数。它必须通过参数接收已存在于缓存中的数据，在本例中可以是users数组或undefined。
+        (prevUsers: IUser[] | undefined) =>
+          prevUsers ? [user, ...prevUsers] : [user]
+      );
+      // 用于使缓存失效，重新向服务器请求数据。这是当您发出某种 POST、PUT、DELETE 等请求时通常想要执行的操作
+      // queryClient.invalidateQueries([USER_QUERY_KEY])
+    },
+  });
+};
+
+export const useEditUser = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(editUser, {
+    onSuccess: (user_updated: IUser) => {
+      queryClient.setQueryData(
+        [USER_QUERY_KEY],
+        (prevUsers: IUser[] | undefined) => {
+          if (prevUsers) {
+            prevUsers.map((user) => {
+              if (user.id === user_updated.id) {
+                user.name = user_updated.name;
+              }
+              return user;
+            });
+          }
+          return prevUsers;
+        }
+      );
+    },
+  });
+};
+
+export const useDeleteUser = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(deleteUser, {
+    onSuccess: (id) => {
+      queryClient.setQueryData(
+        [USER_QUERY_KEY],
+        (prevUsers: IUser[] | undefined) =>
+          prevUsers ? prevUsers.filter((user) => user.id !== id) : prevUsers
+        // queryClient.invalidateQueries([USER_QUERY_KEY])
+      );
+    },
+  });
+};
+
+/************ json-server Mock 的接口 ************/
 export const fetchUserList = async ({ queryKey }: any) => {
   const params = queryKey[0];
 
@@ -21,4 +120,3 @@ export const useFetchUserList = (params?: any) => {
     queryFn: fetchUserList,
   });
 };
-

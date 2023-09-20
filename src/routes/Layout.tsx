@@ -23,10 +23,14 @@ const Layout = () => {
       title: "QueryObserver 用法",
       to: "/QueryObserver",
     },
+    {
+      title: "useQuery 从基础的 CRUD",
+      to: "/userCRUD",
+    },
   ];
 
   return (
-    <div style={{ display: "flex", gap: 20 }}>
+    <div style={{ display: "flex", gap: 10 }}>
       <div style={{ ...commonStyle, width: 200 }}>
         {navList.map((item: INavListItem) => (
           <NavLink style={{ display: "block" }} to={item.to}>
