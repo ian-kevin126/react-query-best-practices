@@ -1,6 +1,8 @@
 import { Button, Card, Table } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useFetchUserList } from "../../api/user";
+import { CommonSpin } from "../../components/Common";
 
 interface User {
   id: number;
@@ -9,16 +11,14 @@ interface User {
   number: string;
 }
 
-interface UserListProps {
-  users: User[];
-}
-
-const UserList: React.FC<UserListProps> = ({ users }) => {
+const UserList: React.FC = () => {
   const navigate = useNavigate();
 
   const goToUserDetail = (id: number) => {
     navigate(`/users/${id}`);
   };
+
+  const { data: userList, isLoading, isError, error } = useFetchUserList();
 
   const columns = [
     {
@@ -48,9 +48,17 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
     },
   ];
 
+  if (isError) {
+    return <>{JSON.stringify(error)}</>;
+  }
+
+  if (isLoading) {
+    return <CommonSpin />;
+  }
+
   return (
     <Card title="用户列表">
-      <Table rowKey={"id"} dataSource={users} columns={columns as any} />
+      <Table rowKey={"id"} dataSource={userList} columns={columns as any} />
     </Card>
   );
 };

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useQuery, QueryObserver, useQueryClient } from "@tanstack/react-query";
-import { Avatar, Card, List } from "antd";
+import { Avatar, Card, Empty, List } from "antd";
 
 const getPostsById = (id: number | undefined) => async () => {
   const { data } = await axios.get(
@@ -25,7 +25,7 @@ const Listener = ({ id }: { id: number | undefined }) => {
   return null;
 };
 
-export default function QueryObserverWrapper() {
+export default function QueryObserverDemo() {
   const [id, setId] = useState<number | undefined>();
 
   const { data: users = [] } = useQuery(["USERS"], async () => {
@@ -76,9 +76,11 @@ export default function QueryObserverWrapper() {
               padding: "10px 8px",
             }}
           >
-            {postsById.map((post: any) => (
-              <span>{post.title}</span>
-            ))}
+            {postsById.length ? (
+              postsById.map((post: any) => <span>{post.title}</span>)
+            ) : (
+              <Empty />
+            )}
           </div>
         </div>
       </div>
