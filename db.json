@@ -1,0 +1,92 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Juliet Oma",
+      "email": "julie@yahoo.com",
+      "number": "08100000000"
+    },
+    {
+      "id": 2,
+      "name": "James Williams",
+      "email": "jameswilly@gmail.com",
+      "number": "08111111111"
+    },
+    {
+      "id": 3,
+      "name": "Ahmed Ali",
+      "email": "ahmedali012@gmail.com",
+      "number": "09022222222"
+    },
+    {
+      "id": 4,
+      "name": "Grace Funsho",
+      "email": "gracefunsho@gmail.com",
+      "number": "09033333333"
+    },
+    {
+      "name": "Juliet Oma11",
+      "email": "julie@yahoo.com",
+      "number": "08100000001",
+      "id": 5
+    },
+    {
+      "name": "Juliet Oma22",
+      "email": "julie@yahoo.com",
+      "number": "08100000001",
+      "id": 6
+    }
+  ],
+  "wines": [
+    {
+      "id": 1,
+      "product": "SOMMELIER SELECT",
+      "desc": "Old vine Cabernet Sauvignon",
+      "price": 159.99
+    },
+    {
+      "id": 2,
+      "product": "MASTER VINTNER",
+      "desc": "Pinot Noir captures luscious aromas",
+      "price": 89.99
+    },
+    {
+      "id": 3,
+      "product": "WINEMAKER'S RESERVE",
+      "desc": "Merlot featuring complex flavors of cherry",
+      "price": 84.99
+    },
+    {
+      "id": 4,
+      "product": "ITALIAN SANGIOVESE",
+      "desc": "Sangiovese grape is famous for its dry, bright cherry character",
+      "price": 147.99
+    },
+    {
+      "id": 6,
+      "product": "MASTER 222",
+      "desc": "Pinot Noir captures luscious aromas111",
+      "price": 99
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "like the added grape skins",
+      "wineId": 1
+    },
+    {
+      "id": 1,
+      "body": "the directions need to be clearer",
+      "wineId": 2
+    },
+    {
+      "id": 3,
+      "body": "I received 3 different packages of wood chips",
+      "wineId": 1
+    }
+  ],
+  "profile": {
+    "name": "vintnor"
+  }
+}
