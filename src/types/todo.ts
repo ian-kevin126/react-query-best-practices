@@ -23,6 +23,8 @@ export interface UseTodo {
 export interface IUser {
   id: number;
   name: string;
+  email?: string;
+  number?: string;
 }
 
 export interface User {

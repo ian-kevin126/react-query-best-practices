@@ -1,28 +1,88 @@
-import { useCreateUser } from "../../../api/user";
+import { useCreateUserM } from "@/api/user";
+import { IUser } from "@/types/todo";
+import { Button, Form, Input, Modal } from "antd";
 
-export const CreateUser = () => {
-  const create_user = useCreateUser();
+interface FieldType {
+  name?: string;
+  email?: string;
+  number?: string;
+}
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const data = Object.fromEntries(new FormData(form));
+interface ICreateUserModalProps {
+  visible: boolean;
+  handleClose: () => void;
+  currentItem: IUser | undefined;
+}
 
-    await create_user.mutateAsync({ name: data.user as string });
+export const CreateUserModal = ({
+  visible,
+  handleClose,
+  currentItem,
+}: ICreateUserModalProps) => {
+  const createUserM = useCreateUserM();
 
-    form.reset();
+  const _modalTitle = currentItem ? "编辑" : "新建";
+
+  const onFinish = async (values: FieldType) => {
+    await createUserM.mutateAsync({ ...values });
+    handleClose();
+  };
+
+  const onFinishFailed = () => {
+    // ...
   };
 
   return (
-    <div>
-      <h1>Create User</h1>
-      <form onSubmit={handleSubmit} className="mt">
-        <input name="user" type="text" placeholder="Add new user" />
-        {create_user.isLoading && <span>creating user...</span>}
-        <button>Add User</button>
-        {create_user.isSuccess && <span>User created successfully ✅</span>}
-        {create_user.isError && <span>Ups! it was an error 🚨</span>}
-      </form>
-    </div>
+    <Modal
+      open={visible}
+      title={`${_modalTitle}用户`}
+      closable
+      centered
+      onCancel={handleClose}
+      footer={null}
+      okText="提 交"
+      cancelText="取 消"
+    >
+      <Form
+        name="basic"
+        labelCol={{ span: 4 }}
+        wrapperCol={{ span: 20 }}
+        style={{ padding: "30px 20px 10px 0" }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Form.Item<FieldType>
+          label="名 字"
+          name="name"
+          rules={[{ required: true, message: "请输入名字!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="邮 箱"
+          name="email"
+          rules={[{ required: true, message: "请输入邮箱!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item<FieldType>
+          label="号 码"
+          name="number"
+          rules={[{ required: true, message: "请输入号码!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item wrapperCol={{ offset: 12, span: 12 }}>
+          <Button type="primary" htmlType="submit">
+            提 交
+          </Button>
+        </Form.Item>
+      </Form>
+    </Modal>
   );
 };

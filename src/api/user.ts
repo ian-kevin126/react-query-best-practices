@@ -102,21 +102,68 @@ export const useDeleteUser = () => {
 };
 
 /************ json-server Mock 的接口 ************/
+const BASE_URL = "http://localhost:8008/users";
+
+export const FETCH_USER_LIST_KEY = "FETCH_USER_LIST_KEY";
+
 export const fetchUserList = async ({ queryKey }: any) => {
   const params = queryKey[0];
 
   const { data } = await axios.get(
-    `http://localhost:8008/users?${qs.stringify(
-      _.omit(params, "queryIdentifier")
-    )}`
+    `${BASE_URL}?${qs.stringify(_.omit(params, "queryIdentifier"))}`
   );
 
   return data;
 };
 
-export const useFetchUserList = (params?: any) => {
+export const useFetchUserList = (params?: Partial<IUser>) => {
   return useQuery({
-    queryKey: [{ queryIdentifier: "fetchUserListKey", params }],
+    queryKey: [{ queryIdentifier: FETCH_USER_LIST_KEY, params }],
     queryFn: fetchUserList,
+  });
+};
+
+export const FETCH_USER_KEY = "FETCH_USER_KEY";
+
+export const fetchUserAPI = async (id: number | undefined) => {
+  const data = await axios.get(`${BASE_URL}/${id}`);
+  return data.data;
+};
+
+export const useFetchUserM = (id: number | undefined) => {
+  return useQuery({
+    queryKey: [FETCH_USER_KEY, id],
+    queryFn: () => fetchUserAPI(id),
+    enabled: Boolean(id),
+  });
+};
+
+export const createUserAPI = (params: Partial<IUser>) => {
+  return axios.post(`${BASE_URL}`, params);
+};
+
+export const useCreateUserM = () => {
+  return useMutation({
+    mutationFn: createUserAPI,
+  });
+};
+
+export const deleteUserAPI = (id: number) => {
+  return axios.post(`${BASE_URL}/${id}`);
+};
+
+export const useDeleteUserM = () => {
+  return useMutation({
+    mutationFn: deleteUserAPI,
+  });
+};
+
+export const updateUserAPI = (params: Partial<IUser>) => {
+  return axios.put(`${BASE_URL}/${params.id}`, params);
+};
+
+export const useUpdateUserM = () => {
+  return useMutation({
+    mutationFn: updateUserAPI,
   });
 };

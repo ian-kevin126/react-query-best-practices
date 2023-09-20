@@ -1,4 +1,4 @@
-import { Button, Card, Table } from "antd";
+import { Button, Card, Space, Table } from "antd";
 import React, { useState } from "react";
 import { useFetchUserList } from "../../api/user";
 import { CommonSpin } from "../../components/Common";
@@ -43,10 +43,22 @@ const UserList: React.FC = () => {
       title: "操作",
       align: "center",
       render: (record: User) => {
-        return <Button onClick={() => goToUserDetail(record.id)}>详情</Button>;
+        return (
+          <Space>
+            <Button onClick={() => goToUserDetail(record.id)}>详情</Button>
+            <Button onClick={() => goToUserDetail(record.id)}>更新</Button>
+            <Button danger onClick={() => goToUserDetail(record.id)}>
+              删除
+            </Button>
+          </Space>
+        );
       },
     },
   ];
+
+  const handleAddUser = () => {
+    // TODO:
+  };
 
   if (isError) {
     return <>{JSON.stringify(error)}</>;
@@ -57,7 +69,14 @@ const UserList: React.FC = () => {
   }
 
   return (
-    <Card title="用户列表">
+    <Card
+      title="用户列表"
+      extra={
+        <Button onClick={handleAddUser} type="primary">
+          新增
+        </Button>
+      }
+    >
       <Table rowKey={"id"} dataSource={userList} columns={columns as any} />
       <UserDetail id={currentId} />
     </Card>
