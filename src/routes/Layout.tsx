@@ -10,7 +10,7 @@ const commonStyle = {
   border: "1px solid #d9d9d9",
   padding: 10,
   borderRadius: 8,
-  minHeight: 400,
+  minHeight: "96vh",
 };
 
 const Layout = () => {

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import UserList from "../pages/UserList";
 import QueryObserverDemo from "../pages/QueryObserver";
 import Layout from "./Layout";
+import UserDetails from "../pages/UserDetail";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <UserList />,
+      },
+      {
+        path: "/users/:id",
+        element: <UserDetails />,
       },
       {
         path: "/QueryObserver",
