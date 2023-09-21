@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ReactQueryDevtoolsProd from "./components/ReactQueryDevTools";
 import { ErrorBoundary } from "react-error-boundary";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import "./index.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {

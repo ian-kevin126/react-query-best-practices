@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import UserList from "../pages/UserList";
 import QueryObserverDemo from "../pages/QueryObserver";
 import Layout from "./Layout";
 import UserCRUD from "../pages/UserCRUD";
+import Articles from "../pages/Articles";
 
 const router = createBrowserRouter([
   {
@@ -10,12 +10,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        index: true,
-        element: <>create</>,
-      },
-      {
-        path: "/users",
-        element: <UserList />,
+        path: "/article",
+        element: <Articles />,
       },
       {
         path: "/userCRUD",

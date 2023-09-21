@@ -1,13 +1,13 @@
-import { INavListItem } from "@/types/user";
-import { commonStyle } from "@/utils/constants";
 import { Button } from "antd";
 import { NavLink, Outlet } from "react-router-dom";
+import { INavListItem } from "@/types/user";
+import { LayoutStyle, commonStyle } from "@/utils/constants";
 
 const Layout = () => {
   const navList: INavListItem[] = [
     {
       title: "useQuery - 基础用法",
-      to: "/users",
+      to: "/article",
     },
     {
       title: "基础的 CRUD",
@@ -20,7 +20,7 @@ const Layout = () => {
   ];
 
   return (
-    <div style={{ display: "flex", gap: 10 }}>
+    <div style={LayoutStyle}>
       <div style={{ ...commonStyle, width: 200 }}>
         {navList.map((item: INavListItem) => (
           <NavLink
