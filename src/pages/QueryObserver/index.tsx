@@ -25,7 +25,7 @@ const Listener = ({ id }: { id: number | undefined }) => {
   return null;
 };
 
-export default function QueryObserverDemo() {
+const QueryObserverDemo1 = () => {
   const [id, setId] = useState<number | undefined>();
 
   const { data: users = [] } = useQuery(["USERS"], async () => {
@@ -87,4 +87,6 @@ export default function QueryObserverDemo() {
       <Listener id={id} />
     </Card>
   );
-}
+};
+
+export default QueryObserverDemo1;

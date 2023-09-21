@@ -14,8 +14,12 @@ const Layout = () => {
       to: "/userCRUD",
     },
     {
-      title: "QueryObserver 用法",
-      to: "/QueryObserver",
+      title: "QueryObserver 用法1",
+      to: "/QueryObserver-1",
+    },
+    {
+      title: "QueryObserver 用法2",
+      to: "/QueryObserver-2",
     },
   ];
 

@@ -169,6 +169,8 @@ export const useUpdateUserM = () => {
   });
 };
 
+// 针对不好抽离的逻辑可以采用 QueryObserver 的方式， 进行订阅处理。
+// QueryObserver 可实现在任意组件中订阅状态
 export const useGetUsersObserver = () => {
   const get_users = useGetUsers();
 

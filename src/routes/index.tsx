@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import QueryObserverDemo from "../pages/QueryObserver";
 import Layout from "./Layout";
 import UserCRUD from "../pages/UserCRUD";
 import Articles from "../pages/Articles";
+import QueryObserverDemo1 from "../pages/QueryObserver";
+import QueryObserverDemo2 from "@/pages/QueryObserver/users";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,12 @@ const router = createBrowserRouter([
         element: <UserCRUD />,
       },
       {
-        path: "/QueryObserver",
-        element: <QueryObserverDemo />,
+        path: "/QueryObserver-1",
+        element: <QueryObserverDemo1 />,
+      },
+      {
+        path: "/QueryObserver-2",
+        element: <QueryObserverDemo2 />,
       },
     ],
   },
