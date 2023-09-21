@@ -1,12 +1,5 @@
-import { IUser } from "@/types/todo";
+import { ICreateUserModalProps, IUser } from "@/types/user";
 import { Button, Form, Input, Modal } from "antd";
-
-interface ICreateUserModalProps {
-  visible: boolean;
-  handleClose: () => void;
-  currentItem: IUser | undefined;
-  handleSubmit: (values: Partial<IUser>) => void;
-}
 
 const DEFAULT_VALUES: Partial<IUser> = {
   name: "",

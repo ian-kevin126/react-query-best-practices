@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import qs from "qs";
-import { IUser } from "../types/todo";
 import _ from "lodash";
+import { IUser } from "@/types/user";
 
 const URL_BASE = "https://jsonplaceholder.typicode.com/users";
 const headers = { "Content-type": "application/json" };

@@ -1,17 +1,7 @@
+import { INavListItem } from "@/types/user";
+import { commonStyle } from "@/utils/constants";
 import { Button } from "antd";
 import { NavLink, Outlet } from "react-router-dom";
-
-interface INavListItem {
-  title: string;
-  to: string;
-}
-
-const commonStyle = {
-  border: "1px solid #d9d9d9",
-  padding: 10,
-  borderRadius: 8,
-  minHeight: "96vh",
-};
 
 const Layout = () => {
   const navList: INavListItem[] = [
@@ -33,7 +23,11 @@ const Layout = () => {
     <div style={{ display: "flex", gap: 10 }}>
       <div style={{ ...commonStyle, width: 200 }}>
         {navList.map((item: INavListItem) => (
-          <NavLink style={{ display: "block" }} to={item.to}>
+          <NavLink
+            style={{ display: "block" }}
+            to={item.to}
+            key={item.title + item.to}
+          >
             <Button type="link">{item.title}</Button>
           </NavLink>
         ))}

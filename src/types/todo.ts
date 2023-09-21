@@ -20,13 +20,6 @@ export interface UseTodo {
   error?: string;
 }
 
-export interface IUser {
-  id: number;
-  name: string;
-  email?: string;
-  number?: string;
-}
-
 export interface User {
   accessToken: string;
   user: {

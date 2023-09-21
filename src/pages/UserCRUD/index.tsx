@@ -9,8 +9,8 @@ import {
   useUpdateUserM,
 } from "@/api/user";
 import { CreateUserModal } from "./components/CreateUser";
-import { IUser } from "@/types/todo";
 import UserDetail from "./components/UserDetail";
+import { IUser } from "@/types/user";
 
 const UserCRUDList: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
