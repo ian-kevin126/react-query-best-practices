@@ -1,8 +1,14 @@
 import axios from "axios";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  QueryObserver,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import qs from "qs";
 import _ from "lodash";
 import { IUser } from "@/types/user";
+import { useEffect, useState } from "react";
 
 const URL_BASE = "https://jsonplaceholder.typicode.com/users";
 const headers = { "Content-type": "application/json" };
@@ -161,4 +167,34 @@ export const useUpdateUserM = () => {
   return useMutation({
     mutationFn: updateUserAPI,
   });
+};
+
+export const useGetUsersObserver = () => {
+  const get_users = useGetUsers();
+
+  const queryClient = useQueryClient();
+
+  const [users, setUsers] = useState<IUser[]>(() => {
+    const data = queryClient.getQueryData<IUser[]>([FETCH_USER_LIST_KEY]);
+    return data ?? [];
+  });
+
+  useEffect(() => {
+    const observer = new QueryObserver<IUser[]>(queryClient, {
+      queryKey: [FETCH_USER_LIST_KEY],
+    });
+
+    const unsubscribe = observer.subscribe((result) => {
+      if (result.data) setUsers(result.data);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [queryClient]);
+
+  return {
+    ...get_users,
+    data: users,
+  };
 };

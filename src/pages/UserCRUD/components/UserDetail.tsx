@@ -1,8 +1,12 @@
-import { useFetchUserM } from "@/api/user";
+import { useGetUsersObserver } from "@/api/user";
 import { Card, Descriptions, DescriptionsProps, Empty } from "antd";
 
 const UserDetail = ({ id }: { id: number | undefined }) => {
-  const { data: user } = useFetchUserM(id);
+  // const { data: user } = useFetchUserM(id);
+
+  // 另外一种实现方式：QueryObserver
+  const get_users = useGetUsersObserver();
+  const user = get_users.data?.find((user) => user.id === id);
 
   const items: DescriptionsProps["items"] = [
     {
