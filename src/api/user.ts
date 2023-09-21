@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import qs from "qs";
-import _ from "lodash";
 import { IUser } from "../types/todo";
+import _ from "lodash";
 
 const URL_BASE = "https://jsonplaceholder.typicode.com/users";
 const headers = { "Content-type": "application/json" };
@@ -106,19 +106,14 @@ const BASE_URL = "http://localhost:8008/users";
 
 export const FETCH_USER_LIST_KEY = "FETCH_USER_LIST_KEY";
 
-export const fetchUserList = async ({ queryKey }: any) => {
-  const params = queryKey[0];
-
-  const { data } = await axios.get(
-    `${BASE_URL}?${qs.stringify(_.omit(params, "queryIdentifier"))}`
-  );
-
+export const fetchUserList = async (params: any) => {
+  const { data } = await axios.get(`${BASE_URL}?${qs.stringify(params)}`);
   return data;
 };
 
-export const useFetchUserList = (params?: Partial<IUser>) => {
+export const useFetchUserList = () => {
   return useQuery({
-    queryKey: [{ queryIdentifier: FETCH_USER_LIST_KEY, params }],
+    queryKey: [FETCH_USER_LIST_KEY],
     queryFn: fetchUserList,
   });
 };
@@ -149,7 +144,7 @@ export const useCreateUserM = () => {
 };
 
 export const deleteUserAPI = (id: number) => {
-  return axios.post(`${BASE_URL}/${id}`);
+  return axios.delete(`${BASE_URL}/${id}`);
 };
 
 export const useDeleteUserM = () => {
@@ -159,7 +154,7 @@ export const useDeleteUserM = () => {
 };
 
 export const updateUserAPI = (params: Partial<IUser>) => {
-  return axios.put(`${BASE_URL}/${params.id}`, params);
+  return axios.put(`${BASE_URL}/${params.id}`, _.omit(params, "id"));
 };
 
 export const useUpdateUserM = () => {

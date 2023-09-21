@@ -16,16 +16,16 @@ const commonStyle = {
 const Layout = () => {
   const navList: INavListItem[] = [
     {
-      title: "useQuery基础用法",
+      title: "useQuery - 基础用法",
       to: "/users",
+    },
+    {
+      title: "基础的 CRUD",
+      to: "/userCRUD",
     },
     {
       title: "QueryObserver 用法",
       to: "/QueryObserver",
-    },
-    {
-      title: "useQuery 从基础的 CRUD",
-      to: "/userCRUD",
     },
   ];
 
