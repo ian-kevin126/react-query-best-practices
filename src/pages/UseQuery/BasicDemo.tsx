@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArticlesSchema } from "@/schemas/article";
 import { Card } from "antd";
 
-const UseQuery_1: FC = () => {
+const BasicDemo: FC = () => {
   const BASE_URL = "https://dev.to/api/articles?username=lynxgsm";
 
   const getArticles = () =>
@@ -39,7 +39,7 @@ const UseQuery_1: FC = () => {
   }
 
   return (
-    <Card title="文章列表">
+    <Card title="基础用法">
       <ul>
         {data?.map((article) => {
           return <li key={article.id}>{article.title}</li>;
@@ -49,4 +49,4 @@ const UseQuery_1: FC = () => {
   );
 };
 
-export default UseQuery_1;
+export default BasicDemo;

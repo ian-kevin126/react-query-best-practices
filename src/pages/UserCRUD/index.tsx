@@ -135,7 +135,7 @@ const UserCRUDList: React.FC = () => {
 
   return (
     <Card
-      title="用户列表"
+      title="基础CRUD"
       extra={
         <Button onClick={handleAddUser} type="primary">
           新增

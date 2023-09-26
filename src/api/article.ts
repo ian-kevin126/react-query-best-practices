@@ -1,11 +1,10 @@
 import axios from "axios";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import qs from "qs";
 import _ from "lodash";
 import { IUser } from "@/types/user";
 import { JS_BASE_URL } from "@/utils/constants";
-// import { Article } from "@/types/article";
-// import { useCallback } from "react";
+import { Article } from "@/types/article";
 
 /************ json-server Mock 的接口 ************/
 
@@ -18,39 +17,48 @@ export const fetchArticleList = async (params?: any) => {
   return data;
 };
 
-// const transformTodoNames = (data: Article[]) =>
-//   data.filter((todo: Article) => todo.status === "stale");
+export const useFetchArticleList1 = (params?: any) => {
+  const queryClient = useQueryClient();
+  return useQuery({
+    queryKey: params
+      ? [FETCH_ARTICLE_LIST_KEY, params]
+      : [FETCH_ARTICLE_LIST_KEY],
+    queryFn: () => fetchArticleList(params),
+    initialData: () => {
+      const allArticles = queryClient.getQueryData<Article[]>([
+        FETCH_ARTICLE_LIST_KEY,
+      ]);
+      console.log("allArticles", allArticles);
 
-export const useFetchArticleList = (params?: any) => {
-  // const queryClient = useQueryClient();
+      let filterData: Article[] | undefined = [];
+      if (params) {
+        filterData = allArticles?.filter(
+          (i: Article) => i.status === params.status
+        );
+      }
+
+      return filterData && filterData.length > 0 ? filterData : undefined;
+    },
+  });
+};
+
+const transformer = (data: Article[]) =>
+  data.filter((todo: Article) => todo.status === "stale");
+
+export const useFetchArticleList2 = (params?: any) => {
   return useQuery({
     queryKey: params
       ? [FETCH_ARTICLE_LIST_KEY, params]
       : [FETCH_ARTICLE_LIST_KEY],
     queryFn: () => fetchArticleList(params),
     // 使用一个稳定的函数引用
-    // select: transformTodoNames,
+    select: transformer,
     // 或者用useCallback包裹
     // select: useCallback(
     //   (data: Article[]) =>
     //     data.filter((todo: Article) => todo.status === "stale"),
     //   []
     // ),
-    // initialData: () => {
-    //   const allArticles = queryClient.getQueryData<Article[]>([
-    //     FETCH_ARTICLE_LIST_KEY,
-    //   ]);
-    //   console.log("allArticles", allArticles);
-
-    //   let filterData: Article[] | undefined = [];
-    //   if (params) {
-    //     filterData = allArticles?.filter(
-    //       (i: Article) => i.status === params.status
-    //     );
-    //   }
-
-    //   return filterData && filterData.length > 0 ? filterData : undefined;
-    // },
   });
 };
 

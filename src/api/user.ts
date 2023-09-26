@@ -119,7 +119,7 @@ export const fetchUserList = async (params: any) => {
   return data;
 };
 
-export const useFetchUserList = (params: any) => {
+export const useFetchUserList = (params?: any) => {
   return useQuery({
     queryKey: [FETCH_USER_LIST_KEY, params],
     queryFn: () => fetchUserList(params),
