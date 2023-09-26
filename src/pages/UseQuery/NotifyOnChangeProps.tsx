@@ -19,7 +19,7 @@ const NotifyOnChangeProps: FC = () => {
   }
 
   return (
-    <Card title="NotifyOnChangeProps">
+    <Card title="NotifyOnChangeProps-Demo">
       <ul>
         {data?.map((article: Article) => {
           return <li key={article.id}>{article.title}</li>;
