@@ -16,6 +16,8 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       // 重请求次数
       retry: 1,
+      // staleTime: 60000,
+      // cacheTime: 60000,
     },
   },
 });

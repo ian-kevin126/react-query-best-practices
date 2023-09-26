@@ -9,6 +9,7 @@ import qs from "qs";
 import _ from "lodash";
 import { IUser } from "@/types/user";
 import { useEffect, useState } from "react";
+import { JS_BASE_URL } from "@/utils/constants";
 
 const URL_BASE = "https://jsonplaceholder.typicode.com/users";
 const headers = { "Content-type": "application/json" };
@@ -108,26 +109,27 @@ export const useDeleteUser = () => {
 };
 
 /************ json-server Mock 的接口 ************/
-const BASE_URL = "http://localhost:8008/users";
 
 export const FETCH_USER_LIST_KEY = "FETCH_USER_LIST_KEY";
 
 export const fetchUserList = async (params: any) => {
-  const { data } = await axios.get(`${BASE_URL}?${qs.stringify(params)}`);
+  const { data } = await axios.get(
+    `${`${JS_BASE_URL}/users`}?${qs.stringify(params)}`
+  );
   return data;
 };
 
-export const useFetchUserList = () => {
+export const useFetchUserList = (params: any) => {
   return useQuery({
-    queryKey: [FETCH_USER_LIST_KEY],
-    queryFn: fetchUserList,
+    queryKey: [FETCH_USER_LIST_KEY, params],
+    queryFn: () => fetchUserList(params),
   });
 };
 
 export const FETCH_USER_KEY = "FETCH_USER_KEY";
 
 export const fetchUserAPI = async (id: number | undefined) => {
-  const data = await axios.get(`${BASE_URL}/${id}`);
+  const data = await axios.get(`${`${JS_BASE_URL}/users`}/${id}`);
   return data.data;
 };
 
@@ -140,7 +142,7 @@ export const useFetchUserM = (id: number | undefined) => {
 };
 
 export const createUserAPI = (params: Partial<IUser>) => {
-  return axios.post(`${BASE_URL}`, params);
+  return axios.post(`${`${JS_BASE_URL}/users`}`, params);
 };
 
 export const useCreateUserM = () => {
@@ -150,7 +152,7 @@ export const useCreateUserM = () => {
 };
 
 export const deleteUserAPI = (id: number) => {
-  return axios.delete(`${BASE_URL}/${id}`);
+  return axios.delete(`${`${JS_BASE_URL}/users`}/${id}`);
 };
 
 export const useDeleteUserM = () => {
@@ -160,7 +162,10 @@ export const useDeleteUserM = () => {
 };
 
 export const updateUserAPI = (params: Partial<IUser>) => {
-  return axios.put(`${BASE_URL}/${params.id}`, _.omit(params, "id"));
+  return axios.put(
+    `${`${JS_BASE_URL}/users`}/${params.id}`,
+    _.omit(params, "id")
+  );
 };
 
 export const useUpdateUserM = () => {

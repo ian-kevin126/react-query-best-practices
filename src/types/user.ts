@@ -1,8 +1,3 @@
-export interface INavListItem {
-  title: string;
-  to: string;
-}
-
 export interface IUser {
   id: number;
   name: string;

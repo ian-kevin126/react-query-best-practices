@@ -94,5 +94,35 @@
   ],
   "profile": {
     "name": "vintnor"
-  }
+  },
+  "articles": [
+    {
+      "id": 1,
+      "content": "like the added grape skins",
+      "title": "react query",
+      "hasRead": false,
+      "status": "available"
+    },
+    {
+      "id": 2,
+      "content": "the directions need to be clearer",
+      "title": "RTK query",
+      "hasRead": true,
+      "status": "empty"
+    },
+    {
+      "id": 3,
+      "content": "I received 3 different packages of wood chips",
+      "title": "swc",
+      "hasRead": false,
+      "status": "stale"
+    },
+    {
+      "id": 4,
+      "content": "I had read this book three weeks ago",
+      "title": "mobx",
+      "hasRead": false,
+      "status": "stale"
+    }
+  ]
 }

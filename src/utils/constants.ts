@@ -1,5 +1,7 @@
 import { CSSProperties } from "react";
 
+export const JS_BASE_URL = "http://localhost:8008";
+
 export const QUERY_KEY = {
   todos: "todos",
   myTodos: "myTodos",

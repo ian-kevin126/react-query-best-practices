@@ -1,38 +1,103 @@
-type User = {
-  name: string;
-  username: string;
-  twitter_username: string;
-  github_username: string;
-  user_id: number;
-  website_url: string;
-  profile_image: string;
-  profile_image_90: string;
+import axios from "axios";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import qs from "qs";
+import _ from "lodash";
+import { IUser } from "@/types/user";
+import { JS_BASE_URL } from "@/utils/constants";
+// import { Article } from "@/types/article";
+// import { useCallback } from "react";
+
+/************ json-server Mock 的接口 ************/
+
+export const FETCH_ARTICLE_LIST_KEY = "FETCH_ARTICLE_LIST_KEY";
+
+export const fetchArticleList = async (params?: any) => {
+  const { data } = await axios.get(
+    `${JS_BASE_URL}/articles?${qs.stringify(params)}`
+  );
+  return data;
 };
 
-export interface Article {
-  type_of: string;
-  id: number;
-  title: string;
-  description: string;
-  readable_publish_date: string;
-  slug: string;
-  path: string;
-  url: string;
-  comments_count: number;
-  public_reactions_count: number;
-  collection_id?: null;
-  published_timestamp: string;
-  positive_reactions_count: number;
-  cover_image: string;
-  social_image: string;
-  canonical_url: string;
-  created_at: string;
-  edited_at?: string | null;
-  crossposted_at?: null;
-  published_at: string;
-  last_comment_at: string;
-  reading_time_minutes: number;
-  tag_list?: string[] | null;
-  tags: string;
-  user: User;
-}
+// const transformTodoNames = (data: Article[]) =>
+//   data.filter((todo: Article) => todo.status === "stale");
+
+export const useFetchArticleList = (params?: any) => {
+  // const queryClient = useQueryClient();
+  return useQuery({
+    queryKey: params
+      ? [FETCH_ARTICLE_LIST_KEY, params]
+      : [FETCH_ARTICLE_LIST_KEY],
+    queryFn: () => fetchArticleList(params),
+    // 使用一个稳定的函数引用
+    // select: transformTodoNames,
+    // 或者用useCallback包裹
+    // select: useCallback(
+    //   (data: Article[]) =>
+    //     data.filter((todo: Article) => todo.status === "stale"),
+    //   []
+    // ),
+    // initialData: () => {
+    //   const allArticles = queryClient.getQueryData<Article[]>([
+    //     FETCH_ARTICLE_LIST_KEY,
+    //   ]);
+    //   console.log("allArticles", allArticles);
+
+    //   let filterData: Article[] | undefined = [];
+    //   if (params) {
+    //     filterData = allArticles?.filter(
+    //       (i: Article) => i.status === params.status
+    //     );
+    //   }
+
+    //   return filterData && filterData.length > 0 ? filterData : undefined;
+    // },
+  });
+};
+
+export const FETCH_ARTICLE_KEY = "FETCH_ARTICLE_KEY";
+
+export const fetchArticleAPI = async (id: number | undefined) => {
+  const data = await axios.get(`${JS_BASE_URL}/articles/${id}`);
+  return data.data;
+};
+
+export const useFetchArticleM = (id: number | undefined) => {
+  return useQuery({
+    queryKey: [FETCH_ARTICLE_KEY, id],
+    queryFn: () => fetchArticleAPI(id),
+    enabled: Boolean(id),
+  });
+};
+
+export const createArticleAPI = (params: Partial<IUser>) => {
+  return axios.post(`${JS_BASE_URL}/articles`, params);
+};
+
+export const useCreateArticleM = () => {
+  return useMutation({
+    mutationFn: createArticleAPI,
+  });
+};
+
+export const deleteArticleAPI = (id: number) => {
+  return axios.delete(`${JS_BASE_URL}/articles/${id}`);
+};
+
+export const useDeleteArticleM = () => {
+  return useMutation({
+    mutationFn: deleteArticleAPI,
+  });
+};
+
+export const updateArticleAPI = (params: Partial<IUser>) => {
+  return axios.put(
+    `${`${JS_BASE_URL}/articles`}/${params.id}`,
+    _.omit(params, "id")
+  );
+};
+
+export const useUpdateArticleM = () => {
+  return useMutation({
+    mutationFn: updateArticleAPI,
+  });
+};
