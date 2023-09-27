@@ -21,3 +21,13 @@ npm install -g json-server
 ```shell
 json-server --watch db.json --port 8008
 ```
+
+# 一键启动
+
+```json
+"start": "vite",
+"mock_server": "json-server --watch db.json --port 8008",
+"dev": "concurrently --kill-others \"npm run mock_server\" \"npm run start\"",
+```
+
+只需要指令 `pnpm run dev` 即可一键启动 mock 服务和项目。
