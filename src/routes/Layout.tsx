@@ -6,7 +6,7 @@ import { IRouteObject, MENU_MAPS } from ".";
 const Layout = () => {
   return (
     <div style={LayoutStyle}>
-      <div style={{ ...commonStyle, width: 200 }}>
+      <div style={{ ...commonStyle, width: 280 }}>
         {MENU_MAPS.map((item: IRouteObject) => (
           <NavLink
             style={{ display: "block" }}

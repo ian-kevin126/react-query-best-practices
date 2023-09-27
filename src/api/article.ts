@@ -37,6 +37,7 @@ export const useFetchArticleList1 = (params?: any) => {
         );
       }
 
+      // 用以前查到过的数据做初始数据
       return filterData && filterData.length > 0 ? filterData : undefined;
     },
   });
@@ -63,7 +64,6 @@ export const useFetchArticleList2 = (params?: any) => {
 };
 
 export const FETCH_ARTICLE_KEY = "FETCH_ARTICLE_KEY";
-
 export const fetchArticleAPI = async (id: number | undefined) => {
   const data = await axios.get(`${JS_BASE_URL}/articles/${id}`);
   return data.data;

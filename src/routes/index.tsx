@@ -7,6 +7,8 @@ import InitialData from "@/pages/UseQuery/InitialData";
 import QueryObserverDemo1 from "@/pages/QueryObserver";
 import QueryObserverDemo2 from "@/pages/QueryObserver/users";
 import SelectOption from "@/pages/UseQuery/SelectOption";
+import NotifyOnChangeProps from "@/pages/UseQuery/NotifyOnChangeProps";
+import Prefetching from "@/pages/UseQuery/Prefetching";
 
 export type IRouteObject = RouteObject & {
   title: string;
@@ -32,6 +34,16 @@ export const MENU_MAPS: IRouteObject[] = [
     title: "useQuery - select",
     path: "/select",
     element: <SelectOption />,
+  },
+  {
+    title: "useQuery - notifyOnChangeProps",
+    path: "/notifyOnChangeProps",
+    element: <NotifyOnChangeProps />,
+  },
+  {
+    title: "useQuery - prefetching",
+    path: "/prefetching",
+    element: <Prefetching />,
   },
   {
     title: "QueryObserver 用法1",
