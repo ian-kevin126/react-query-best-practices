@@ -16,6 +16,9 @@ import CancelQueryWithAxios1 from "@/pages/Query/CancelQueryWithAxios1";
 import CancelQueryWithFetch1 from "@/pages/Query/CancelQueryWithFetch1";
 import CancelQueryWithFetch2 from "@/pages/Query/CancelQueryWithFetch2";
 import CancelQueryWithAxios2 from "@/pages/Query/CancelQueryWithAxios2";
+import InfiniteQueries from "@/pages/Query/InfiniteQueries";
+import ParallelQueries from "@/pages/Query/ParallelQueries";
+import DependentQueries from "@/pages/Query/DependentQueries";
 
 export type IRouteObject = RouteObject & {
   title: string;
@@ -38,7 +41,7 @@ export const MENU_MAPS: IRouteObject[] = [
     element: <InitialData />,
   },
   {
-    title: "useQuery - select",
+    title: "useQuery - 过滤 select",
     path: "/select",
     element: <SelectOption />,
   },
@@ -48,12 +51,12 @@ export const MENU_MAPS: IRouteObject[] = [
     element: <NotifyOnChangeProps />,
   },
   {
-    title: "useQuery - prefetching1",
+    title: "useQuery - 预取 prefetching1",
     path: "/prefetching1",
     element: <Prefetching1 />,
   },
   {
-    title: "useQuery - prefetching2",
+    title: "useQuery - 预取 prefetching2",
     path: "/prefetching2",
     element: <Prefetching2 />,
   },
@@ -81,6 +84,21 @@ export const MENU_MAPS: IRouteObject[] = [
     title: "useQuery - CancelQueryWithFetch - new",
     path: "/cancelQueryWithFetch2",
     element: <CancelQueryWithFetch2 />,
+  },
+  {
+    title: "无限滚动查询 - InfiniteQueries",
+    path: "/InfiniteQueries",
+    element: <InfiniteQueries />,
+  },
+  {
+    title: "并行查询 - ParallelQueries",
+    path: "/ParallelQueries",
+    element: <ParallelQueries />,
+  },
+  {
+    title: "依赖查询 - DependentQueries",
+    path: "/DependentQueries",
+    element: <DependentQueries />,
   },
   {
     title: "QueryObserver 用法1",
