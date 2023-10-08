@@ -6,7 +6,7 @@ import {
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { User } from "./useUser";
-import { ResponseError } from "../ResponseError";
+import { ResponseError } from "../errors";
 import { QUERY_KEY } from "../constants";
 
 async function signIn(email: string, password: string): Promise<User> {

@@ -1,8 +1,8 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useState } from "react";
-import { Todo, UseTodo, UseTodos } from "../../types/todo";
+import { ITodo, IUseTodo, IUseTodos } from "../../types/todo";
 import { QUERY_KEY } from "../constants";
-import { ResponseError } from "../ResponseError";
+import { ResponseError } from "../errors";
 
 function mapError(error: unknown | undefined): undefined | string {
   if (!error) return undefined;
@@ -11,23 +11,30 @@ function mapError(error: unknown | undefined): undefined | string {
   return "Unknown error";
 }
 
-const fetchTodos = async (): Promise<Todo[]> => {
-  const response = await fetch("api/tasks");
+const fetchTodos = async (
+  signal: AbortSignal | undefined
+): Promise<ITodo[]> => {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/todos?_limit=10",
+    {
+      signal,
+    }
+  );
   if (!response.ok) {
     throw new ResponseError("Failed to fetch todos", response);
   }
   return await response.json();
 };
 
-export const useTodos = (): UseTodos => {
+export const useTodos = (): IUseTodos => {
   const client = useQueryClient();
 
   const [userFilter, setUserFilter] = useState<number | null>(null);
 
   const filterTodoByAssignee = useCallback(
-    (todos: Todo[]) => {
+    (todos: ITodo[]) => {
       if (!userFilter) return todos;
-      return todos.filter((todo) => todo.assigneeId === userFilter);
+      return todos.filter((todo) => todo.completed);
     },
     [userFilter]
   );
@@ -37,12 +44,14 @@ export const useTodos = (): UseTodos => {
     isLoading,
     isFetching,
     error,
-  } = useQuery([QUERY_KEY.todos], fetchTodos, {
+  } = useQuery({
+    queryKey: [QUERY_KEY.todos],
+    queryFn: ({ signal }) => fetchTodos(signal),
     refetchOnWindowFocus: false,
     retry: 2,
     select: filterTodoByAssignee,
     onSuccess: (data) => {
-      data.forEach((todo: Todo) => {
+      data.forEach((todo: ITodo) => {
         client.prefetchQuery([QUERY_KEY.todos, todo.id], () =>
           fetchTodo(todo.id)
         );
@@ -59,15 +68,17 @@ export const useTodos = (): UseTodos => {
   };
 };
 
-const fetchTodo = async (id: Todo["id"]): Promise<Todo> => {
-  const response = await fetch(`api/tasks/${id}`);
+const fetchTodo = async (id: ITodo["id"]): Promise<ITodo> => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${id}`
+  );
   if (!response.ok) {
     throw new ResponseError(`Failed to fetch todo with id ${id}`, response);
   }
   return await response.json();
 };
 
-export const useGetTodoById = (id: Todo["id"]): UseTodo => {
+export const useGetTodoById = (id: number): IUseTodo => {
   const {
     data: todo = null,
     isLoading,

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { ResponseError } from "../ResponseError";
+import { ResponseError } from "../errors";
 import { QUERY_KEY } from "../constants";
 import * as userLocalStorage from "./user.localstore";
 

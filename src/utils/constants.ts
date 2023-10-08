@@ -13,7 +13,7 @@ export const LayoutStyle: CSSProperties = {
   gap: 10,
   width: "100vw",
   padding: "10px",
-  height: "100vh",
+  minHeight: "100vh",
   boxSizing: `border-box`,
 };
 
