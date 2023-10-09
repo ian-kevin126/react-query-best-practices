@@ -19,6 +19,8 @@ import CancelQueryWithAxios2 from "@/pages/Query/CancelQueryWithAxios2";
 import InfiniteQueries from "@/pages/Query/InfiniteQueries";
 import ParallelQueries from "@/pages/Query/ParallelQueries";
 import DependentQueries from "@/pages/Query/DependentQueries";
+import UseMutation from "@/pages/Mutation/UseMutation";
+import OptimisticUpdate from "@/pages/Mutation/OptimisticUpdate";
 
 export type IRouteObject = RouteObject & {
   title: string;
@@ -109,6 +111,16 @@ export const MENU_MAPS: IRouteObject[] = [
     title: "QueryObserver 用法2",
     path: "/QueryObserver-2",
     element: <QueryObserverDemo2 />,
+  },
+  {
+    title: "useMutation - 基本用法",
+    path: "/useMutation",
+    element: <UseMutation />,
+  },
+  {
+    title: "useMutation - 乐观更新",
+    path: "/OptimisticUpdate",
+    element: <OptimisticUpdate />,
   },
 ];
 

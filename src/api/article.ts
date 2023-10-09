@@ -2,7 +2,6 @@ import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import qs from "qs";
 import _ from "lodash";
-import { IUser } from "@/types/user";
 import { JS_BASE_URL } from "@/utils/constants";
 import { Article } from "@/types/article";
 
@@ -15,6 +14,13 @@ export const fetchArticleList = async (params?: any) => {
     `${JS_BASE_URL}/articles?${qs.stringify(params)}`
   );
   return data;
+};
+
+export const useFetchArticleList = (params?: any) => {
+  return useQuery({
+    queryKey: [FETCH_ARTICLE_LIST_KEY],
+    queryFn: () => fetchArticleList(params),
+  });
 };
 
 export const useFetchArticleList1 = (params?: any) => {
@@ -77,7 +83,7 @@ export const useFetchArticleM = (id: number | undefined) => {
   });
 };
 
-export const createArticleAPI = (params: Partial<IUser>) => {
+export const createArticleAPI = (params: Partial<Article>) => {
   return axios.post(`${JS_BASE_URL}/articles`, params);
 };
 
@@ -97,7 +103,7 @@ export const useDeleteArticleM = () => {
   });
 };
 
-export const updateArticleAPI = (params: Partial<IUser>) => {
+export const updateArticleAPI = (params: Partial<Article>) => {
   return axios.put(
     `${`${JS_BASE_URL}/articles`}/${params.id}`,
     _.omit(params, "id")
