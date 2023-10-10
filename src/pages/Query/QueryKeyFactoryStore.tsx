@@ -30,6 +30,7 @@ const PhotosComponent = () => {
   const currentPage = useRef(1);
   console.log("queryKeys", queryKeys);
 
+  // https://suspensive.org/docs/react-query/src/useSuspenseQueries.i18n
   const query = useSuspenseInfiniteQuery({
     ...QUERY_KEY_STORE.photos.all,
     useErrorBoundary: false,

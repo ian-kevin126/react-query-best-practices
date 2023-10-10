@@ -45,7 +45,8 @@ export const PHOTO_QUERY_KEY = createQueryKeys("PHOTO_QUERY_KEY", {
   },
 });
 
-export type FakeAPIDefs = typeof TODO_QUERY_KEY;
-export type FakeAPIKeys = inferQueryKeys<typeof TODO_QUERY_KEY>;
+export type TodoQueryKeyDefs = typeof TODO_QUERY_KEY;
+export type TodoQueryKeys = inferQueryKeys<typeof TODO_QUERY_KEY>;
 
+// 对不同模块的 queryKey 进行分类管理，通过 mergeQueryKeys 方法将它们组织在一起进行统一管理并导出给业务使用
 export const queryKeys = mergeQueryKeys(TODO_QUERY_KEY, PHOTO_QUERY_KEY);

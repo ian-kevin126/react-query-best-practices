@@ -4,10 +4,11 @@ import { ITodo } from "@/types/todo";
 
 export const itemsPerPage = 5;
 
+// 在单个文件中定义所有的 queryKeys
 const QUERY_KEY_STORE = createQueryKeyStore({
   todos: {
     all: {
-      queryKey: ["todos"],
+      queryKey: ["TODOS"],
       queryFn: (context): Promise<ITodo[]> =>
         fetch("https://jsonplaceholder.typicode.com/todos?_limit=10", {
           signal: context.signal,
@@ -22,7 +23,7 @@ const QUERY_KEY_STORE = createQueryKeyStore({
   },
   photos: {
     all: {
-      queryKey: ["photos", itemsPerPage],
+      queryKey: ["PHOTOS", itemsPerPage],
       queryFn: (context): Promise<IPhoto[]> =>
         fetch(
           `https://jsonplaceholder.typicode.com/photos?_start=${
