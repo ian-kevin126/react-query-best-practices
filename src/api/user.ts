@@ -112,7 +112,7 @@ export const useDeleteUser = () => {
 
 export const FETCH_USER_LIST_KEY = "FETCH_USER_LIST_KEY";
 
-export const fetchUserList = async (params: any) => {
+export const fetchUserList = async (params: any): Promise<IUser[]> => {
   const { data } = await axios.get(
     `${`${JS_BASE_URL}/users`}?${qs.stringify(params)}`
   );
@@ -120,7 +120,7 @@ export const fetchUserList = async (params: any) => {
 };
 
 export const useFetchUserList = (params?: any) => {
-  return useQuery({
+  return useQuery<IUser[], Error>({
     queryKey: [FETCH_USER_LIST_KEY, params],
     queryFn: () => fetchUserList(params),
   });
@@ -128,13 +128,13 @@ export const useFetchUserList = (params?: any) => {
 
 export const FETCH_USER_KEY = "FETCH_USER_KEY";
 
-export const fetchUserAPI = async (id: number | undefined) => {
+export const fetchUserAPI = async (id: number | undefined): Promise<IUser> => {
   const data = await axios.get(`${`${JS_BASE_URL}/users`}/${id}`);
   return data.data;
 };
 
 export const useFetchUserM = (id: number | undefined) => {
-  return useQuery({
+  return useQuery<IUser, Error>({
     queryKey: [FETCH_USER_KEY, id],
     queryFn: () => fetchUserAPI(id),
     enabled: Boolean(id),
@@ -187,7 +187,7 @@ export const useGetUsersObserver = () => {
   });
 
   useEffect(() => {
-    const observer = new QueryObserver<IUser[]>(queryClient, {
+    const observer = new QueryObserver<IUser[], Error>(queryClient, {
       queryKey: [FETCH_USER_LIST_KEY],
     });
 

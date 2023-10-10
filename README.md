@@ -31,3 +31,8 @@ json-server --watch db.json --port 8008
 ```
 
 只需要指令 `pnpm run dev` 即可一键启动 mock 服务和项目。
+
+# 推荐资源
+
+- [Redux Took Kit Query in React](https://medium.com/readytowork-org/redux-took-kit-query-in-react-69220942f5e5)
+- [Like react-query and redux? You'll love RTK Query](https://dev.to/esponges/like-react-query-and-redux-youll-love-rtk-query-1cge)

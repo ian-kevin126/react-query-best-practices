@@ -4,16 +4,17 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import qs from "qs";
 
-export const fetchPostsByParams = (params: Partial<IPost>) => async () => {
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?${qs.stringify(params)}`
-  );
-  return await response.json();
-};
+export const fetchPostsByParams =
+  (params: Partial<IPost>) => async (): Promise<IPost[]> => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/posts?${qs.stringify(params)}`
+    );
+    return await response.json();
+  };
 
 export const fetchPosts =
   (page = 1) =>
-  async () => {
+  async (): Promise<IPost[]> => {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/posts?_limit=10&_page=${page + 1}`
     );
@@ -47,7 +48,7 @@ export const useDeletePost = () => {
 };
 
 export const useGetPosts = (page = 0) =>
-  useQuery({
+  useQuery<IPost[], Error>({
     queryKey: ["posts"],
     queryFn: async () => {
       const { data } = await axios.get(
@@ -58,7 +59,7 @@ export const useGetPosts = (page = 0) =>
     staleTime: 180000,
   });
 
-export const getPostById = async (id: any) => {
+export const getPostById = async (id: any): Promise<IPost> => {
   const { data } = await axios.get(
     `https://jsonplaceholder.typicode.com/posts/${id}`
   );
@@ -67,7 +68,7 @@ export const getPostById = async (id: any) => {
 };
 
 export const useGetPostById = (postId: any) =>
-  useQuery({
+  useQuery<IPost, Error>({
     queryKey: ["post", postId],
     queryFn: () => getPostById(postId),
     enabled: !!postId,
