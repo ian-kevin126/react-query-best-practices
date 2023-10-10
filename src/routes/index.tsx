@@ -21,6 +21,8 @@ import ParallelQueries from "@/pages/Query/ParallelQueries";
 import DependentQueries from "@/pages/Query/DependentQueries";
 import UseMutation from "@/pages/Mutation/UseMutation";
 import OptimisticUpdate from "@/pages/Mutation/OptimisticUpdate";
+import QueryKeyFactoryDemo from "@/pages/Query/QueryKeyFactory";
+import QueryKeyFactoryStore from "@/pages/Query/QueryKeyFactoryStore";
 
 export type IRouteObject = RouteObject & {
   title: string;
@@ -121,6 +123,16 @@ export const MENU_MAPS: IRouteObject[] = [
     title: "useMutation - 乐观更新",
     path: "/OptimisticUpdate",
     element: <OptimisticUpdate />,
+  },
+  {
+    title: "高级技巧 - QueryKeyFactory",
+    path: "/QueryKeyFactory",
+    element: <QueryKeyFactoryDemo />,
+  },
+  {
+    title: "高级技巧 - QueryKeyFactoryStore",
+    path: "/QueryKeyFactoryStore",
+    element: <QueryKeyFactoryStore />,
   },
 ];
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Card, List, Spin, Typography } from "antd";
 import { useDeletePost, usePostsQuery } from "@/api/post";
-import { queryClient } from "@/main";
+import { queryClient } from "@/App";
 
 interface IPost {
   userId: number;

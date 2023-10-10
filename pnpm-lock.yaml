@@ -1,6 +1,15 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@lukemorales/query-key-factory':
+    specifier: ^1.3.2
+    version: 1.3.2(@tanstack/query-core@4.33.0)(@tanstack/react-query@4.33.0)
+  '@suspensive/react':
+    specifier: ^1.15.3
+    version: 1.15.3(react@18.2.0)
+  '@suspensive/react-query':
+    specifier: ^1.15.3
+    version: 1.15.3(@suspensive/react@1.15.3)(@tanstack/react-query@4.33.0)(react@18.2.0)
   '@tanstack/react-query':
     specifier: ^4.33.0
     version: 4.33.0(react-dom@18.2.0)(react@18.2.0)
@@ -678,6 +687,17 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
+  /@lukemorales/query-key-factory@1.3.2(@tanstack/query-core@4.33.0)(@tanstack/react-query@4.33.0):
+    resolution: {integrity: sha512-SFOWcB5ec+RhlKjLjZxTAbOPF2uXNED6lqXiMu3TUt2twKzxE/QLhnYkdbxOBMK5Wwc2Ia+WP3yqCPRKWywnwQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@tanstack/query-core': '>= 4.0.0'
+      '@tanstack/react-query': '>= 4.0.0'
+    dependencies:
+      '@tanstack/query-core': 4.33.0
+      '@tanstack/react-query': 4.33.0(react-dom@18.2.0)(react@18.2.0)
+    dev: false
+
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -794,6 +814,32 @@ packages:
   /@remix-run/router@1.8.0:
     resolution: {integrity: sha512-mrfKqIHnSZRyIzBcanNJmVQELTnX+qagEDlcKO90RgRBVOZGSGvZKeDihTRfWcqoDn5N/NkUcwWTccnpN18Tfg==}
     engines: {node: '>=14.0.0'}
+    dev: false
+
+  /@suspensive/react-query@1.15.3(@suspensive/react@1.15.3)(@tanstack/react-query@4.33.0)(react@18.2.0):
+    resolution: {integrity: sha512-58tTTXFO9OH/s5DR1R3cqsTZRXp+ToA//M+0fslIU8vNODonQ6KEJYMBhrmzpAQN+XMuhVHaO/2bxAG4AtuHyw==}
+    peerDependencies:
+      '@suspensive/react': ^1.15.3
+      '@tanstack/react-query': ^4
+      react: ^16.8 || ^17 || ^18
+    peerDependenciesMeta:
+      '@suspensive/react':
+        optional: true
+    dependencies:
+      '@suspensive/react': 1.15.3(react@18.2.0)
+      '@tanstack/react-query': 4.33.0(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    dev: false
+    bundledDependencies:
+      - tsd
+
+  /@suspensive/react@1.15.3(react@18.2.0):
+    resolution: {integrity: sha512-YBQ1xoBb/c4346TS6VtFYgZAPfAslTJn0cpfukf0Q3BLt1gUFGgmMnfcuavNx1+a3bjT+7cVARtPUfiWXnwegA==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
   /@tanstack/match-sorter-utils@8.8.4:

@@ -1,4 +1,4 @@
-import { queryClient } from "@/main";
+import { queryClient } from "@/App";
 import { CommonListProps } from "@/types/common";
 import { List, Spin, Typography } from "antd";
 

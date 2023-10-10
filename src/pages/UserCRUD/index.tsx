@@ -20,6 +20,9 @@ const UserCRUDList: React.FC = () => {
   const [createUserModalVisible, setCreateUserModalVisible] = useState(false);
   const [currentItem, setCurrentItem] = useState<IUser | undefined>();
 
+  // 在使用React Query时，我很少使用解构。首先，像data和error这样的名称相当普遍（特意如此），
+  // 所以您可能会重新命名它们。保持整个对象将保留数据的上下文信息以及错误的来源。这还将有助于
+  // TypeScript在使用status字段或其中一个status布尔值时缩小类型，如果您使用解构，则无法实现这一点
   const { data: userList, isLoading, isError, error } = useFetchUserList();
   const createUserM = useCreateUserM();
   const updateUserM = useUpdateUserM();

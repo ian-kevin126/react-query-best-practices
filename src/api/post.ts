@@ -1,6 +1,15 @@
-import { queryClient } from "@/main";
+import { queryClient } from "@/App";
+import { IPost } from "@/types/post";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import qs from "qs";
+
+export const fetchPostsByParams = (params: Partial<IPost>) => async () => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/posts?${qs.stringify(params)}`
+  );
+  return await response.json();
+};
 
 export const fetchPosts =
   (page = 1) =>

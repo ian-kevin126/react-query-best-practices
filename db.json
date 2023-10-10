@@ -152,5 +152,45 @@
       "status": "empty",
       "id": 8
     }
+  ],
+  "devices": [
+    {
+      "id": 1,
+      "name": "IPhone 8",
+      "price": 2000,
+      "description": "大萨达撒打撒大大撒大萨达撒"
+    },
+    {
+      "id": 2,
+      "name": "IPhone 9",
+      "price": 3000,
+      "description": "fdfsdfds323232fdsfdsffsd"
+    },
+    {
+      "id": 3,
+      "name": "IPhone 10",
+      "price": 4000,
+      "description": "dssadsadsadadas"
+    }
+  ],
+  "visitors": [
+    {
+      "id": 1,
+      "name": "ian-kevin",
+      "age": 18,
+      "description": "dsadasdaddasddsad2121sdadsda"
+    },
+    {
+      "id": 2,
+      "name": "tom-krush",
+      "age": 33,
+      "description": "fsdffsdfdf323"
+    },
+    {
+      "id": 3,
+      "name": "ketty-moon",
+      "age": 22,
+      "description": "dsadsdsdasd"
+    }
   ]
 }
