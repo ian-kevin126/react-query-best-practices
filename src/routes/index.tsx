@@ -23,6 +23,7 @@ import UseMutation from "@/pages/Mutation/UseMutation";
 import OptimisticUpdate from "@/pages/Mutation/OptimisticUpdate";
 import QueryKeyFactoryDemo from "@/pages/Query/QueryKeyFactory";
 import QueryKeyFactoryStore from "@/pages/Query/QueryKeyFactoryStore";
+import QueryPolling from "@/pages/Query/QueryPolling";
 
 export type IRouteObject = RouteObject & {
   title: string;
@@ -65,18 +66,23 @@ export const MENU_MAPS: IRouteObject[] = [
     element: <Prefetching2 />,
   },
   {
+    title: "useQuery - 轮询",
+    path: "/queryPolling",
+    element: <QueryPolling />,
+  },
+  {
     title: "useQuery - pagination",
     path: "/pagination",
     element: <Pagination />,
   },
   {
     title: "useQuery - CancelQueryWithAxios - old",
-    path: "/CancelQueryWithAxios1",
+    path: "/cancelQueryWithAxios1",
     element: <CancelQueryWithAxios1 />,
   },
   {
     title: "useQuery - CancelQueryWithAxios - new",
-    path: "/CancelQueryWithAxios2",
+    path: "/cancelQueryWithAxios2",
     element: <CancelQueryWithAxios2 />,
   },
   {
@@ -91,27 +97,27 @@ export const MENU_MAPS: IRouteObject[] = [
   },
   {
     title: "无限滚动查询 - InfiniteQueries",
-    path: "/InfiniteQueries",
+    path: "/infiniteQueries",
     element: <InfiniteQueries />,
   },
   {
     title: "并行查询 - ParallelQueries",
-    path: "/ParallelQueries",
+    path: "/parallelQueries",
     element: <ParallelQueries />,
   },
   {
     title: "依赖查询 - DependentQueries",
-    path: "/DependentQueries",
+    path: "/dependentQueries",
     element: <DependentQueries />,
   },
   {
     title: "QueryObserver 用法1",
-    path: "/QueryObserver-1",
+    path: "/queryObserver-1",
     element: <QueryObserverDemo1 />,
   },
   {
     title: "QueryObserver 用法2",
-    path: "/QueryObserver-2",
+    path: "/queryObserver-2",
     element: <QueryObserverDemo2 />,
   },
   {
@@ -121,17 +127,17 @@ export const MENU_MAPS: IRouteObject[] = [
   },
   {
     title: "useMutation - 乐观更新",
-    path: "/OptimisticUpdate",
+    path: "/optimisticUpdate",
     element: <OptimisticUpdate />,
   },
   {
     title: "高级技巧 - QueryKeyFactory",
-    path: "/QueryKeyFactory",
+    path: "/queryKeyFactory",
     element: <QueryKeyFactoryDemo />,
   },
   {
     title: "高级技巧 - QueryKeyFactoryStore",
-    path: "/QueryKeyFactoryStore",
+    path: "/queryKeyFactoryStore",
     element: <QueryKeyFactoryStore />,
   },
 ];
