@@ -36,3 +36,4 @@ json-server --watch db.json --port 8008
 
 - [Redux Took Kit Query in React](https://medium.com/readytowork-org/redux-took-kit-query-in-react-69220942f5e5)
 - [Like react-query and redux? You'll love RTK Query](https://dev.to/esponges/like-react-query-and-redux-youll-love-rtk-query-1cge)
+- [Normalize your React Query data with MobX State Tree](https://dev.to/lloyds-digital/normalize-your-react-query-data-with-mobx-state-tree-17fa)

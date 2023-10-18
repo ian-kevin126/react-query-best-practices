@@ -10,6 +10,10 @@ export const GlobalStore = () => {
   const [serverData, setServerData] = useState(null);
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [secondaryTheme, setSecondaryTheme] = useState(theme.LIGHT);
+  console.log(
+    "🚀 ~ file: global.ts:13 ~ GlobalStore ~ secondaryTheme:",
+    secondaryTheme
+  );
 
   const toggleTheme = () => {
     setSelectedTheme((currentTheme) =>
@@ -22,6 +26,10 @@ export const GlobalStore = () => {
       currentTheme === theme.LIGHT ? theme.DARK : theme.LIGHT
     );
   };
+  console.log(
+    "🚀 ~ file: global.ts:25 ~ toggleSecondaryTheme ~ toggleSecondaryTheme:",
+    toggleSecondaryTheme
+  );
 
   const fetchData = (name = "ian") => {
     setIsLoadingData(true);

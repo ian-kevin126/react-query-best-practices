@@ -7,6 +7,7 @@ import {
 import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Button } from "antd";
+import { Provider } from "mobx-react";
 import ReactQueryDevtoolsProd from "./components/ReactQueryDevTools";
 import "./index.css";
 // import axios from "axios";
@@ -31,6 +32,15 @@ export const queryClient = new QueryClient({
       // staleTime: 60000,
       // cacheTime: 60000,
       // queryFn: defaultQueryFn,
+      structuralSharing: false,
+      getNextPageParam(response: any) {
+        // 这是特定于服务器响应的
+        if (response) {
+          return response?.length;
+        }
+
+        return null;
+      },
     },
   },
 });
@@ -62,7 +72,9 @@ const App = () => {
             </div>
           )}
         >
-          <RouterProvider router={router} />
+          <Provider store={null}>
+            <RouterProvider router={router} />
+          </Provider>
         </RequestBoundary>
       </Suspense>
       {import.meta.env.DEV && (
